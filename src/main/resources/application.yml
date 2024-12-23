@@ -1,0 +1,10 @@
+spring:
+  application:
+  name: parsing-files-apache-camel
+
+  redis:
+    host: localhost
+    port: 6379
+    password: 'crisda24'
+    timeout: 20000
+    database: 0
