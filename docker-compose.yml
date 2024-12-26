@@ -14,3 +14,19 @@ services:
       retries: 3
     command: >
       --requirepass crisda24 --port 6379
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "StrongPassword123" # Contraseña del usuario SA
+      ACCEPT_EULA: "Y" # Aceptar los términos de licencia de SQL Server
+      MSSQL_PID: "Developer" # Edición Developer gratuita
+    volumes:
+      - sql_data:/var/opt/mssql # Persistencia de datos
+      - ./db/data.sql:/docker-entrypoint-initdb.d/data.sql
+
+volumes:
+  sql_data:

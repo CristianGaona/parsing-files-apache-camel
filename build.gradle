@@ -28,6 +28,8 @@ dependencies {
     implementation 'org.apache.camel.springboot:camel-spring-boot-starter:4.9.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'io.lettuce:lettuce-core:6.5.0.RELEASE'
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+    implementation 'com.microsoft.sqlserver:mssql-jdbc'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

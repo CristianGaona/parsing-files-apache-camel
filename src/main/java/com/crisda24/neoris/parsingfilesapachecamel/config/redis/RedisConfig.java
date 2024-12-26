@@ -22,16 +22,16 @@ import java.time.Duration;
 @Slf4j
 public class RedisConfig {
 
-    @Value("${spring.redis.host}")
+    @Value("${spring.data.redis.host}")
     private String host;
 
-    @Value("${spring.redis.port}")
+    @Value("${spring.data.redis.port}")
     private int port;
 
-    @Value("${spring.redis.password}")
+    @Value("${spring.data.redis.password}")
     private String password;
 
-    @Value("${spring.redis.timeout:5000}") // Timeout en milisegundos, con valor por defecto
+    @Value("${spring.data.redis.timeout}") // Timeout en milisegundos, con valor por defecto
     private long timeout;
 
     @Bean
@@ -39,10 +39,8 @@ public class RedisConfig {
     public ReactiveRedisConnectionFactory reactiveRedisConnectionFactory() {
         log.info("Estableciendo conexión con Redis...");
 
-        // Configuración de LettuceConnectionFactory con autenticación
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(host, port);
 
-        // Si hay una contraseña configurada, la agregamos a la fábrica de conexiones
         if (password != null && !password.isEmpty()) {
             lettuceConnectionFactory.setPassword(password);
             log.info("Autenticación con Redis realizada correctamente.");

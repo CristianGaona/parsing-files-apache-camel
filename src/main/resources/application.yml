@@ -1,10 +1,38 @@
 spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
   application:
-  name: parsing-files-apache-camel
+    name: parsing-files-apache-camel
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 'crisda24'
+      timeout: 20000
+      database: 0
 
-  redis:
-    host: localhost
-    port: 6379
-    password: 'crisda24'
-    timeout: 20000
-    database: 0
+
+
+  logging:
+    level:
+      com.zaxxer.hikari: DEBUG
+
+
+
+datasource:
+  jdbc-url: jdbc:sqlserver://localhost:1433;databaseName=parsing-files
+  username: sa
+  password: StrongPassword123
+  driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  hikari:
+    minimum-idle: 1
+    maximum-pool-size: 10
+    idle-timeout: 1800000
+    connection-timeout: 180000
+    max-lifetime: 0
+    connection-test-query: SELECT 1
