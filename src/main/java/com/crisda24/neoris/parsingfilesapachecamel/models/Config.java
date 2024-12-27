@@ -5,15 +5,11 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
 
-@Table("config")
+@Table("config_table")
 public class Config implements Serializable {
 
     @Id
 
     private Long id;
     private String name;
-    private String key;
-    private String fileInput;
-    private String fileOutput;
-    private String fileTransform;
 }

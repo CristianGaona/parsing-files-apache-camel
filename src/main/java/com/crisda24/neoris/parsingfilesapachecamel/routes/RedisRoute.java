@@ -5,26 +5,23 @@ import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.stereotype.Component;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import lombok.extern.slf4j.Slf4j;
-import reactor.core.publisher.Mono;
 
 @Slf4j
 
 @Component
-public class CamelRoutes extends RouteBuilder {
+public class RedisRoute extends RouteBuilder {
 
     private final ReactiveRedisTemplate<String, String> redisTemplate;
 
-    public CamelRoutes(@Qualifier("defaultReactiveRedisTemplate") ReactiveRedisTemplate<String, String> redisTemplate) {
+    public RedisRoute(@Qualifier("defaultReactiveRedisTemplate") ReactiveRedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
+
     @Value("${spring.redis.host}")
     private String redisHost;
 
@@ -46,13 +43,6 @@ public class CamelRoutes extends RouteBuilder {
                     }
                 })
                 .handled(true);
-        //getContext().addComponent("redis", redisComponent());
-        /*from("redis:" + redisHost + ":" + redisPort + "?channels=my-channel&command=SUBSCRIBE")
-                .routeId("redis-listener")
-                .log("Mensaje recibido de Redis: ${body}")
-                .onException(Exception.class)
-                .log("Error al recibir el mensaje de Redis: ${exception.message}")
-                .handled(true);*/
 
         from("direct:publishToRedis")
                 .routeId("redisPublishRoute")
@@ -72,14 +62,6 @@ public class CamelRoutes extends RouteBuilder {
                 .log("Error enviando mensaje a Redis: ${header.redisError}")
                 .handled(true)
                 .end();
-
-
-        /*from("direct:processMessage")
-                .process(exchange -> {
-                    String body = exchange.getIn().getBody(String.class);
-                    exchange.getMessage().setBody("Procesado: " + body);
-                })
-                .log("Mensaje procesado: ${body}");*/
     }
 
 }

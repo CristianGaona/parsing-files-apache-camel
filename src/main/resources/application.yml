@@ -16,24 +16,14 @@ spring:
     timeout: 20000
     database: 0
 
-
-
   logging:
     level:
       org.springframework.r2dbc.core: DEBUG
-      com.zaxxer.hikari: DEBUG
-      org.apache.camel:DEBUG:
-      logging.level.org.apache.camel.component.redis:DEBUG:
+      org.apache.camel: DEBUG
+      org.apache.camel.component.redis: DEBUG
 
   r2dbc:
-    url: r2dbc:sqlserver://172.19.0.3:1433;databaseName=parsing-files
+    url: r2dbc:mssql://localhost:1433/SampleDB
     username: sa
     password: StrongPassword123
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#    hikari:
-#      minimum-idle: 1
-#      maximum-pool-size: 10
-#      idle-timeout: 1800000
-#      connection-timeout: 180000
-#      max-lifetime: 300000
-#      connection-test-query: SELECT 1
+    driver: sqlserver

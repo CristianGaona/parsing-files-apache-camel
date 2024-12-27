@@ -24,26 +24,37 @@ repositories {
 }
 
 dependencies {
+
+    // Webflux
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+
+    // Camel
     implementation 'org.apache.camel.springboot:camel-spring-boot-starter:4.9.0'
     implementation 'org.apache.camel:camel-reactor:4.0.0'
+    implementation 'org.apache.camel:camel-componentdsl:4.9.0'
+    annotationProcessor 'org.apache.camel:camel-component-maven-plugin:4.9.0'
+
+    // jackson
+    implementation 'org.apache.camel:camel-jackson:4.9.0'
+
+    // redis
     implementation 'org.apache.camel:camel-redis:4.9.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'io.lettuce:lettuce-core:6.5.0.RELEASE'
-    implementation 'com.zaxxer:HikariCP:5.0.1'
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    //implementation 'com.microsoft.sqlserver:mssql-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
-    implementation 'io.r2dbc:r2dbc-mssql'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.apache.camel:camel-componentdsl:4.9.0'
-    implementation 'org.apache.camel:camel-jackson:4.9.0'
 
-    annotationProcessor 'org.apache.camel:camel-component-maven-plugin:4.9.0'
+    // reactive mssql
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'io.r2dbc:r2dbc-mssql'
+
+    // actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    // Spring Boot camel
     implementation 'org.apache.camel.springboot:camel-bindy-starter:4.9.0'
     implementation 'org.apache.camel.springboot:camel-spring-boot-starter:4.9.0'
     implementation 'org.apache.camel.springboot:camel-jackson-starter:4.9.0'
@@ -51,6 +62,8 @@ dependencies {
     implementation 'org.apache.camel.springboot:camel-xslt-saxon-starter:4.9.0'
     implementation 'org.apache.camel.springboot:camel-stax-starter:4.9.0'
     implementation 'org.smooks.cartridges:smooks-dfdl-cartridge:1.0.1'
+
+    // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

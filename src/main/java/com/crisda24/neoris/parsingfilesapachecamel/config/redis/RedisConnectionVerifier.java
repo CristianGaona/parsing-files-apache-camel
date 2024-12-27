@@ -18,6 +18,7 @@ public class RedisConnectionVerifier {
     public RedisConnectionVerifier(@Qualifier("defaultReactiveRedisTemplate") ReactiveRedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
+
     @PostConstruct
     public void verifyConnection() {
         redisTemplate.opsForValue()
