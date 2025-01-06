@@ -25,7 +25,6 @@ public class TransformationService {
 
     public String transformDataToJSON(List<Map<String, Object>> data) {
         try {
-            // Usamos ObjectMapper de Jackson para convertir los datos a JSON
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(data);
         } catch (JsonProcessingException e) {

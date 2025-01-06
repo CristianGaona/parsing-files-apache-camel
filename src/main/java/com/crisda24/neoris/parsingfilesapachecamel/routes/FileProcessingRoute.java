@@ -33,5 +33,7 @@ public class FileProcessingRoute extends RouteBuilder {
                 .bean(TransformationService.class, "transformDataToJSON")
                 .to("file://src/main/resources/output?fileName=processed-output.json")
                 .log("File processed and saved to output folder.");
+
+        
     }
 }

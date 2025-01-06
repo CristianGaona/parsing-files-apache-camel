@@ -38,3 +38,8 @@ gradlew
 
 ### VS Code ###
 .vscode/
+
+
+### Files
+/src/main/resources/input/
+/src/main/resources/output/

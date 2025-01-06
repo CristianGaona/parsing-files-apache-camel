@@ -84,8 +84,7 @@ public class ConfigController {
                                 }
                         );
 
-                        producerTemplate.sendBodyAndHeader(
-                                "direct:processFile",
+                        producerTemplate.sendBodyAndHeader("direct:processFileBatch",
                                 inputStream,
                                 "CamelFileName",
                                 file.filename()
@@ -98,5 +97,19 @@ public class ConfigController {
                         return Mono.error(new RuntimeException("Error processing file: " + e.getMessage(), e));
                     }
                 });
+    }
+
+
+    @PostMapping("/upload2")
+    public Mono<ResponseEntity<String>> uploadFile(@RequestPart("file") MultipartFile file) {
+        return Mono.create(sink -> {
+            try {
+                InputStream inputStream = file.getInputStream();
+                producerTemplate.sendBodyAndHeader("direct:processFileBatch2", inputStream, "CamelFileName", file.getOriginalFilename());
+                sink.success(ResponseEntity.ok("File processed successfully"));
+            } catch (IOException e) {
+                sink.error(new RuntimeException("Error processing file: " + e.getMessage(), e));
+            }
+        });
     }
 }

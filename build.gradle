@@ -6,6 +6,7 @@ plugins {
 
 group = 'com.crisda24.neoris'
 version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
 java {
     toolchain {
@@ -63,10 +64,14 @@ dependencies {
     implementation 'org.apache.camel.springboot:camel-stax-starter:4.9.0'
     implementation 'org.smooks.cartridges:smooks-dfdl-cartridge:1.0.1'
 
+    // Batch
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.springframework.batch:spring-batch-test'
 }
 
 tasks.named('test') {
